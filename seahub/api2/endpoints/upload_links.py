@@ -1,3 +1,4 @@
+import os
 import logging
 from constance import config
 
@@ -19,6 +20,7 @@ from seahub.api2.throttling import UserRateThrottle
 from seahub.share.models import UploadLinkShare
 from seahub.utils import gen_shared_upload_link
 from seahub.views import check_folder_permission
+from seahub.utils.timeutils import datetime_to_isoformat_timestr
 
 logger = logging.getLogger(__name__)
 
@@ -36,9 +38,30 @@ class UploadLinks(APIView):
         data = {}
         token = uls.token
 
-        data['repo_id'] = uls.repo_id
-        data['path'] = uls.path
-        data['ctime'] = uls.ctime
+        repo_id = uls.repo_id
+        try:
+            repo = seafile_api.get_repo(repo_id)
+        except Exception as e:
+            logger.error(e)
+            repo = None
+
+        path = uls.path
+        if path:
+            obj_name = '/' if path == '/' else os.path.basename(path.rstrip('/'))
+        else:
+            obj_name = ''
+
+        if uls.ctime:
+            ctime = datetime_to_isoformat_timestr(uls.ctime)
+        else:
+            ctime = ''
+
+        data['repo_id'] = repo_id
+        data['repo_name'] = repo.repo_name if repo else ''
+        data['path'] = path
+        data['obj_name'] = obj_name
+        data['view_cnt'] = uls.view_cnt
+        data['ctime'] = ctime
         data['link'] = gen_shared_upload_link(token)
         data['token'] = token
         data['username'] = uls.username
@@ -103,6 +126,8 @@ class UploadLinks(APIView):
 
         if len(result) == 1:
             result = result[0]
+        else:
+            result.sort(lambda x, y: cmp(x['obj_name'], y['obj_name']))
 
         return Response(result)
 
