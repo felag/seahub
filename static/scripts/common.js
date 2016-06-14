@@ -139,10 +139,8 @@ define([
 
                 // Links
                 case 'get_shared_download_link': return siteRoot + 'share/ajax/get-download-link/';
-                case 'delete_shared_download_link': return siteRoot + 'share/ajax/link/remove/';
                 case 'send_shared_download_link': return siteRoot + 'share/link/send/';
                 case 'send_shared_upload_link': return siteRoot + 'share/upload_link/send/';
-                case 'delete_shared_upload_link': return siteRoot + 'share/ajax/upload_link/remove/';
                 case 'get_share_upload_link': return siteRoot + 'share/ajax/get-upload-link/';
 
                 // Group
