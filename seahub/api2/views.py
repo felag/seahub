@@ -2049,8 +2049,8 @@ class FileView(APIView):
                 }
                 resp = Response(new_dirent_info, status=status.HTTP_201_CREATED)
                 uri = reverse('FileView', args=[repo_id], request=request)
-                resp['Location'] = uri + '?p=' + quote(parent_dir) + \
-                        quote(new_file_name)
+                resp['Location'] = uri + '?p=' + quote(parent_dir.encode('utf-8')) + \
+                        quote(new_file_name.encode('utf-8'))
                 return resp
         else:
             return api_error(status.HTTP_400_BAD_REQUEST,
@@ -2519,8 +2519,8 @@ class DirView(APIView):
                 }
                 resp = Response(new_dirent_info, status=status.HTTP_201_CREATED)
                 uri = reverse('DirView', args=[repo_id], request=request)
-                resp['Location'] = uri + '?p=' + quote(parent_dir) + \
-                    quote(new_dir_name)
+                resp['Location'] = uri + '?p=' + quote(parent_dir.encode('utf-8')) + \
+                    quote(new_dir_name.encode('utf-8'))
             return resp
         elif operation.lower() == 'rename':
             if check_folder_permission(request, repo.id, path) != 'rw':

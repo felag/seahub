@@ -9,7 +9,7 @@ from urllib import quote
 from tests.common.common import USERNAME, PASSWORD, \
     ADMIN_USERNAME, ADMIN_PASSWORD
 
-from tests.common.utils import apiurl, urljoin, randstring
+from tests.common.utils import urljoin, randstring
 from tests.api.urls import TOKEN_URL, GROUPS_URL, ACCOUNTS_URL, REPOS_URL
 
 class ApiTestBase(unittest.TestCase):
@@ -189,16 +189,14 @@ class ApiTestBase(unittest.TestCase):
         fname = fname or ('文件 %s.txt' % randstring())
         furl = repo.get_filepath_url('/' + fname)
         data = {'operation': 'create'}
-        res = self.post(furl, data=data, expected=201)
-        self.assertEqual(res.text, '"success"')
+        self.post(furl, data=data, expected=201)
         return fname, furl
 
     def create_dir(self, repo):
         data = {'operation': 'mkdir'}
         dpath = '/目录 %s' % randstring()
         durl = repo.get_dirpath_url(dpath)
-        res = self.post(durl, data=data, expected=201)
-        self.assertEqual(res.text, u'"success"')
+        self.post(durl, data=data, expected=201)
         return dpath, durl
 
 
