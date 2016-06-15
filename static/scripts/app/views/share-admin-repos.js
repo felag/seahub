@@ -67,9 +67,8 @@ define([
 
         showLibraries: function() {
             this.initPage();
-            var _this = this;
             this.repos.fetch({
-                cache: false, // for IE
+                cache: false,
                 reset: true,
                 error: function (xhr) {
                     Common.ajaxErrorHandler(xhr);

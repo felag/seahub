@@ -1526,14 +1526,14 @@
 </script>
 
 <script type="text/template" id="share-admin-repo-tmpl">
-    <td><img src="<%= icon_url %>" title="<%= icon_title %>" alt="<%= icon_title %>" width="24" /></td>
-    <td><a href="<%- repo_url %>"><%- repo_name %></a></td>
+    <td><img src="<%= icon_url %>" title="<%- icon_title %>" alt="<%- icon_title %>" width="24" /></td>
+    <td><a href="<%= repo_url %>"><%- repo_name %></a></td>
     <% if (share_type == 'personal') { %>
     <td title="<%- user_email %>"><%- user_name %></td>
     <% } else if (share_type == 'group') { %>
-    <td title="<%- group_id %>"><%- group_name %></td>
+    <td><%- group_name %></td>
     <% } else if (share_type == 'public') { %>
-    <td title="{% trans "all members"%}">{% trans "all members"%}</td>
+    <td>{% trans "all members"%}</td>
     <% } %>
     <td>
         <% if (share_permission == 'rw') { %>
@@ -1585,11 +1585,11 @@
 
 <script type="text/template" id="share-admin-folder-tmpl">
     <td><img src="<%= icon_url %>" width="24" /></td>
-    <td><a href="<%- folder_url %>"><%- folder_name %></a></td>
+    <td><a href="<%= folder_url %>"><%- folder_name %></a></td>
     <% if (share_type == 'personal') { %>
     <td title="<%- user_email %>"><%- user_name %></td>
     <% } else if (share_type == 'group') { %>
-    <td title="<%- group_id %>"><%- group_name %></td>
+    <td><%- group_name %></td>
     <% } %>
     <td>
         <% if (share_permission == 'rw') { %>
@@ -1663,9 +1663,9 @@
 </script>
 
 <script type="text/template" id="share-admin-share-link-item-tmpl">
-    <td class="dirent-icon"><img src="<%- icon_url %>" width="24" alt="" /></td>
-    <td><a href="<%- dirent_url %>"><%- obj_name %></a></td>
-    <td><a href="#common/lib/<%= repo_id %>"><%- repo_name %></a></td>
+    <td class="dirent-icon"><img src="<%= icon_url %>" width="24" alt="" /></td>
+    <td><a href="<%= dirent_url %>"><%- obj_name %></a></td>
+    <td><a href="#common/lib/<%- repo_id %>"><%- repo_name %></a></td>
     <td><%- view_cnt %></td>
     <% if (expire_date) { %>
         <% if (is_expired) { %>
@@ -1683,9 +1683,9 @@
 </script>
 
 <script type="text/template" id="share-admin-upload-link-item-tmpl">
-    <td class="dirent-icon"><img src="<%- icon_url %>" width="24" alt="" /></td>
-    <td><a href="<%- dirent_url %>"><%- obj_name %></a></td>
-    <td><a href="#common/lib/<%= repo_id %>"><%- repo_name %></a></td>
+    <td class="dirent-icon"><img src="<%= icon_url %>" width="24" alt="" /></td>
+    <td><a href="<%= dirent_url %>"><%- obj_name %></a></td>
+    <td><a href="#common/lib/<%- repo_id %>"><%- repo_name %></a></td>
     <td><%- view_cnt %></td>
     <td>
         <a href="#" class="sf2-icon-link view-link op-icon vh" title="{% trans "View"%}"></a>

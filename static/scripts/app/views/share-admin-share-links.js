@@ -97,9 +97,8 @@ define([
 
         showLinks: function() {
             this.initPage();
-            var _this = this;
             this.links.fetch({
-                cache: false, // for IE
+                cache: false,
                 reset: true,
                 error: function (xhr) {
                     Common.ajaxErrorHandler(xhr);
